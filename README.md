@@ -1,12 +1,13 @@
 ## 개요
 간단한 커머스 프로젝트 (코틀린 + 스프링 )
 
-Use : Spring , Jpa, Mysql , Redis , Docker , AWS,
+Use : Spring , Jpa, Mysql , Redis , Docker , AWS, 
 
 Goal : 셀러와 구매자 사이를 중계해 주는 커머스 서버를 구축한다.
 
 ## 회원
 ### 공통
+MailGun 을 활용 
 - [ ]  이메일을 통해서 인증번호를 통한 회원가입
 
 ## 고객
