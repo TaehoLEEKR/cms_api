@@ -1,5 +1,6 @@
 package com.kotlinprc.domain.model
 
+import com.kotlinprc.domain.SignUpForm
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -15,6 +16,7 @@ class Customer : BaseEntity() {
     @Column(nullable = false)
     open var id: Long? = null
 
+    @Column(unique = true)
     open var email: String? = null
 
     open var name: String? = null
@@ -24,4 +26,24 @@ class Customer : BaseEntity() {
     open var birth: String? = null
 
     open var phone: String? = null
+
+    open var verifyExpiredAt : String? = null
+
+    open var verificationCode : String? = null
+
+    open var verify : Boolean? = null
+
+    companion object {
+        fun from(signUpForm: SignUpForm): Customer {
+            return Customer().apply {
+                email = signUpForm.email
+                name = signUpForm.name
+                password = signUpForm.password
+                birth = signUpForm.birth
+                phone = signUpForm.phone
+                verify = false
+            }
+        }
+    }
+
 }

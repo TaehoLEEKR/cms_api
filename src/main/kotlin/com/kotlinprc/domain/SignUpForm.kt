@@ -6,7 +6,7 @@ class SignUpForm(
     val email: String,
     val name : String,
     val password: String,
-    val birth: LocalDate,
+    val birth: String,
     val phone: String
 ) {
 }
