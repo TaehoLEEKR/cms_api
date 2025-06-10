@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service
 @Service
 class SignUpCustomerService (val customerRepository: CustomerRepository){
     fun signUp(form: SignUpForm) : Customer = customerRepository.save(Customer.from(form))
+    fun isEmailExist(email : String) : Boolean = customerRepository.findByEmail(email).isPresent
 }
