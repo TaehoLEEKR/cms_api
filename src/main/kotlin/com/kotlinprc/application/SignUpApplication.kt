@@ -3,6 +3,8 @@ package com.kotlinprc.application
 import com.kotlinprc.client.MailGunClient
 import com.kotlinprc.domain.SignUpForm
 import com.kotlinprc.domain.model.Customer
+import com.kotlinprc.exception.CustomException
+import com.kotlinprc.exception.ErrorCode
 import com.kotlinprc.service.SignUpCustomerService
 import org.springframework.stereotype.Service
 
@@ -14,8 +16,9 @@ class SignUpApplication (
     fun customerSignUp(signUpForm: SignUpForm) {
         if(signUpCustomerService.isEmailExist(signUpForm.email)){
             //Exception
+            throw CustomException(ErrorCode.ALREADY_REGISTER_USER)
         }else{
-            var customer : Customer = signUpCustomerService.signUp(signUpForm)
+            val customer : Customer = signUpCustomerService.signUp(signUpForm)
         }
     }
 }
