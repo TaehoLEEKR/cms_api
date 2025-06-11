@@ -12,10 +12,8 @@ import org.apache.commons.lang3.RandomStringUtils
 import java.time.LocalDateTime
 
 @Service
-class SignUpApplication (
-    val mailGunClient: MailGunClient,
-    val signUpCustomerService: SignUpCustomerService
-){
+class SignUpApplication (val mailGunClient: MailGunClient, val signUpCustomerService: SignUpCustomerService){
+
     fun customerSignUp(signUpForm: SignUpForm) {
         if(signUpCustomerService.isEmailExist(signUpForm.email)){
             //Exception
@@ -23,7 +21,7 @@ class SignUpApplication (
         }else{
             val customer : Customer = signUpCustomerService.signUp(signUpForm)
             val now : LocalDateTime = LocalDateTime.now()
-
+            val code : String = getRandomCode()
             val sendForm = SendMailForm(
                 form = "test@test.com",
                 to = signUpForm.email,
@@ -32,11 +30,11 @@ class SignUpApplication (
                     getVerificationEmailBody(
                         signUpForm.email,
                         signUpForm.name,
-                        getRandomCode()
+                        code
                     )
             )
-
             mailGunClient.sendEmail(sendForm)
+            signUpCustomerService.ChangeCustomerValidateEmail(customer.id!!, code)
         }
     }
 
