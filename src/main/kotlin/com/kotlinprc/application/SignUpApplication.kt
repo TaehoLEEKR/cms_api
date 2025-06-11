@@ -25,7 +25,12 @@ class SignUpApplication (
 
     fun getRandomCode() : String = RandomStringUtils.random(10,true,true)
 
-    fun getVerificationEmailBody(){
-
+    fun getVerificationEmailBody(email:String, name : String, code : String): String {
+        var builder : StringBuilder = StringBuilder()
+        return builder.append("Hello ").append(name).append("! Please Click Link for verification \n\n")
+            .append("http://localhost:8080/customer/signup/verify?email=")
+            .append(email)
+            .append("&code=")
+            .append(code).toString()
     }
 }
