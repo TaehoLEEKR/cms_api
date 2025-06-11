@@ -1,6 +1,7 @@
 package com.kotlinprc.application
 
 import com.kotlinprc.client.MailGunClient
+import com.kotlinprc.client.SendMailForm
 import com.kotlinprc.domain.SignUpForm
 import com.kotlinprc.domain.model.Customer
 import com.kotlinprc.exception.CustomException
@@ -8,6 +9,7 @@ import com.kotlinprc.exception.ErrorCode
 import com.kotlinprc.service.SignUpCustomerService
 import org.springframework.stereotype.Service
 import org.apache.commons.lang3.RandomStringUtils
+import java.time.LocalDateTime
 
 @Service
 class SignUpApplication (
@@ -20,6 +22,21 @@ class SignUpApplication (
             throw CustomException(ErrorCode.ALREADY_REGISTER_USER)
         }else{
             val customer : Customer = signUpCustomerService.signUp(signUpForm)
+            val now : LocalDateTime = LocalDateTime.now()
+
+            val sendForm = SendMailForm(
+                form = "test@test.com",
+                to = signUpForm.email,
+                subject = "Verification Test Email",
+                text =
+                    getVerificationEmailBody(
+                        signUpForm.email,
+                        signUpForm.name,
+                        getRandomCode()
+                    )
+            )
+
+            mailGunClient.sendEmail(sendForm)
         }
     }
 
