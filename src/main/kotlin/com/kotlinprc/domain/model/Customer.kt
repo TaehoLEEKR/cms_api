@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import org.hibernate.envers.AuditOverride
+import java.time.LocalDateTime
 
 @Entity
 @AuditOverride(forClass = BaseEntity::class)
@@ -27,7 +28,7 @@ class Customer : BaseEntity() {
 
     open var phone: String? = null
 
-    open var verifyExpiredAt : String? = null
+    open var verifyExpiredAt : LocalDateTime? = null
 
     open var verificationCode : String? = null
 
