@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 @Service
 class SignUpApplication (val mailGunClient: MailGunClient, val signUpCustomerService: SignUpCustomerService){
 
-    fun customerSignUp(signUpForm: SignUpForm) {
+    fun customerSignUp(signUpForm: SignUpForm) : String {
         if(signUpCustomerService.isEmailExist(signUpForm.email)){
             //Exception
             throw CustomException(ErrorCode.ALREADY_REGISTER_USER)
@@ -36,6 +36,8 @@ class SignUpApplication (val mailGunClient: MailGunClient, val signUpCustomerSer
             mailGunClient.sendEmail(sendForm)
             signUpCustomerService.ChangeCustomerValidateEmail(customer.id!!, code)
         }
+
+        return "회원가입 완료"
     }
 
     fun getRandomCode() : String = RandomStringUtils.random(10,true,true)
