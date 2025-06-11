@@ -28,6 +28,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.data:spring-data-envers")
     implementation("com.mysql:mysql-connector-j")
+
+    implementation("org.apache.commons:commons-lang3:3.12.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

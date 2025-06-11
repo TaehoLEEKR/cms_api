@@ -7,6 +7,7 @@ import com.kotlinprc.exception.CustomException
 import com.kotlinprc.exception.ErrorCode
 import com.kotlinprc.service.SignUpCustomerService
 import org.springframework.stereotype.Service
+import org.apache.commons.lang3.RandomStringUtils
 
 @Service
 class SignUpApplication (
@@ -20,5 +21,11 @@ class SignUpApplication (
         }else{
             val customer : Customer = signUpCustomerService.signUp(signUpForm)
         }
+    }
+
+    fun getRandomCode() : String = RandomStringUtils.random(10,true,true)
+
+    fun getVerificationEmailBody(){
+
     }
 }
