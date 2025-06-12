@@ -51,5 +51,5 @@ class SignUpApplication (val mailGunClient: MailGunClient, val signUpCustomerSer
             .append(code).toString()
     }
 
-    fun customerVerify(email : String, code : String) = 0
+    fun customerVerify(email : String, code : String) = signUpCustomerService.verify(email, code)
 }

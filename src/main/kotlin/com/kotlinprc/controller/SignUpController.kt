@@ -23,7 +23,9 @@ class SignUpController(
 
 
     @PutMapping("/verify/customer")
-    fun verify(@RequestParam email : String, @RequestParam code : String) : ResponseEntity<String> =
-        ResponseEntity.ok(signUpApplication.customerVerify(email,code))
+    fun verify(@RequestParam email : String, @RequestParam code : String) : ResponseEntity<String> {
+        signUpApplication.customerVerify(email,code)
+        ResponseEntity.ok("인증 이 완료 되었습니다.")
+    }
 
 }
